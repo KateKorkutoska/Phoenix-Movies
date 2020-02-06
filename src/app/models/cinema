@@ -1,0 +1,9 @@
+export interface Cinema {
+    key: string;
+    cinemaID: string;
+    address: string;
+    latitude: number;
+    link: string;
+    longitude: number;
+    name: string;
+}

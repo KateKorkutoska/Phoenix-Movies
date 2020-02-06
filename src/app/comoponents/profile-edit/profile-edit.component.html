@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons>
+            <ion-button (click)="dismiss()">
+                <ion-icon name="close">Close</ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="userForm">
+        <ion-card>
+            <ion-card-header>
+                <ng-container *ngIf="imageToBeUploaded">
+                    <img [src]="imageToBeUploaded" alt="">
+                </ng-container>
+                <ng-container *ngIf="!imageToBeUploaded">
+                    <img [src]=userData.img>
+                </ng-container>
+                <ion-button shape="block" color="secondary" (click)="takePicture()">
+                    Take Picture
+                </ion-button>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label position="floating">Name</ion-label>
+                    <ion-input type="text" formControlName="name"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Surname</ion-label>
+                    <ion-input type="text" formControlName="surname"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Old Email</ion-label>
+                    <ion-input type="text" formControlName="email" [disabled]="true"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">New Email Address</ion-label>
+                    <ion-input type="text" formControlName="newMail"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" formControlName="password"
+                               placeholder="Enter your original password in order to change settings"></ion-input>
+                </ion-item>
+
+            </ion-card-content>
+        </ion-card>
+
+        <ion-button shape="block" color="primary" (click)="update()">
+            Update
+        </ion-button>
+    </form>
+
+</ion-content>

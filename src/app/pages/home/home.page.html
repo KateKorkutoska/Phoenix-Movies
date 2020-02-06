@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="openMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Showing Now</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ng-container *ngFor="let movie of $movies | async">
+        <ng-container *ngIf="movie.end > date && movie.start <= date">
+            <ion-item-sliding *ngIf="userService.loggedInUser?.admin === true" >
+                <ion-item>
+                    <app-movie [title]="movie.title"
+                               [description]="movie.description"
+                               [landscape]="movie.landscape"
+                               [navigate]="['/home/movie-details', movie.key]"></app-movie>
+                </ion-item>
+                <ion-item-options style="padding-top: 40%">
+                    <ion-button  color="secondary" shape="block" [routerLink]="['/home/edit-movie', movie.key]"> Edit Movie</ion-button>
+                </ion-item-options>
+            </ion-item-sliding>
+            <ion-item *ngIf="userService.loggedInUser?.admin === false">
+                <app-movie [title]="movie.title"
+                           [description]="movie.description"
+                           [landscape]="movie.landscape"
+                           [navigate]="['/home/movie-details', movie.key]"></app-movie>
+            </ion-item>
+        </ng-container>
+
+    </ng-container>
+    <ng-container *ngIf="userService.loggedInUser?.admin === true">
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button>
+                <ion-icon name="add" (click)="presentModal()"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+    </ng-container>
+</ion-content>

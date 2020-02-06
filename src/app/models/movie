@@ -1,0 +1,16 @@
+
+
+export interface Movie {
+    key: string;
+    buy: string;
+    cast: string;
+    description: string;
+    director: string;
+    start: Date;
+    end: Date;
+    movieID: string;
+    poster: string;
+    title: string;
+    trailer: string;
+    landscape: string;
+}

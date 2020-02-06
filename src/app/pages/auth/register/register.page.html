@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button routerLink="/entry">
+                <ion-icon name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Register</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div style="text-align: center; padding-top: 5%">
+        <img src="../../../../assets/images/for%20app.png" width="80%" height="50%" alt="">
+    </div>
+    <ion-card>
+        <ion-card-content>
+            <form [formGroup]="registerForm">
+                <ion-item>
+                    <ion-label position="floating">Name</ion-label>
+                    <ion-input type="text" formControlName="name"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Surname</ion-label>
+                    <ion-input type="text" formControlName="surname"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input type="text" formControlName="email"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" formControlName="password"></ion-input>
+                </ion-item>
+            </form>
+            <div style="text-align: center">
+                <ion-button shape="rounded" color="primary" (click)="create()">
+                    Create
+                </ion-button>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

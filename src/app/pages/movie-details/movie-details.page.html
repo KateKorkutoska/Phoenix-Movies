@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Movie Details</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card *ngIf="movie">
+        <ion-card-header>
+            <img [src]="movie.poster">
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row style="text-align: center">
+                    <ion-col size="4">
+                        <ng-container *ngIf="checkWatchlist(userService.loggedInUser?.key,movie?.key)">
+                            <ion-button (click)="addToWatchlist(movie.key)">
+                                <ion-icon name="heart-empty"></ion-icon>
+                            </ion-button>
+                        </ng-container>
+                        <ng-container *ngIf="!checkWatchlist(userService.loggedInUser?.key, movie?.key)">
+                            <ion-button (click)="removeWatchlist(movie?.key)">
+                                <ion-icon name="heart"></ion-icon>
+                            </ion-button>
+                        </ng-container>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-button color="danger" shape="rounded" (click)="openVideo(movie.trailer)">
+                            <ion-icon name="logo-youtube"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ng-container *ngIf="getUrl() !== 'history'">
+                            <ion-button color="secondary" shape="rounded" color="primary" (click)="showMap()">
+                                <ion-icon name="map"></ion-icon>
+                            </ion-button>
+                        </ng-container>
+                        <ng-container *ngIf="getUrl() === 'history'">
+                            <ion-button color="secondary" (click)="goToUrl(movie?.buy)">
+                                <ion-icon name="cash"></ion-icon>
+                            </ion-button>
+                        </ng-container>
+
+                    </ion-col>
+
+                </ion-row>
+            </ion-grid>
+            <ion-list>
+                <ion-list-header>
+                    <ion-card-title style="text-align: center">{{movie.title}}</ion-card-title>
+                </ion-list-header>
+                <ion-item style="padding-top: 5%">
+                    <ion-icon name="text" slot="start"></ion-icon>
+                    {{movie.description}}
+
+                </ion-item>
+                <ion-item style="padding-top: 5%">
+                    <ion-icon name="people" slot="start"></ion-icon>
+                    {{movie.cast}}
+                </ion-item>
+                <ion-item style="padding-top: 5%">
+                    <ion-icon name="person" slot="start"></ion-icon>
+                    {{movie.director}}
+                </ion-item>
+
+                <ion-item style="padding-top: 5%">
+                    <ion-icon name="calendar" slot="start"></ion-icon>
+                    {{movie.start|date: "mediumDate"}}
+
+                </ion-item>
+            </ion-list>
+            <ng-container *ngIf="showMapButton">
+                <app-map [$cinemas]="cinemas"></app-map>
+                <ion-button color="secondary" (click)="findClosestCinema()">
+                    Find Closest Cinema
+                </ion-button>
+                <ion-list *ngIf="showInfo">
+                    <ion-item>{{closest?.address}}</ion-item>
+                    <ion-item>{{closest?.name}}</ion-item>
+                    <ion-item>{{closest?.link}}</ion-item>
+                </ion-list>
+            </ng-container>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

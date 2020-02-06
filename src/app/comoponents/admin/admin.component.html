@@ -1,0 +1,119 @@
+<ion-header>
+    <ion-toolbar text-center>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="floating">Choose Type</ion-label>
+                <ion-select type="text" (ionChange)="change($event)">
+                    <ion-select-option value="1">Movie</ion-select-option>
+                    <ion-select-option value="2">Cinema</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ng-container *ngIf="type === true">
+                <form [formGroup]="movieForm">
+                    <ion-item>
+                        <ion-label position="floating">Title</ion-label>
+                        <ion-input type="text" formControlName="title"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Movie ID</ion-label>
+                        <ion-input type="text" formControlName="movieID"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Director</ion-label>
+                        <ion-input type="text" formControlName="director"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Description</ion-label>
+                        <ion-input type="text" formControlName="description"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Cast</ion-label>
+                        <ion-input type="text" formControlName="cast"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Release date (yyyy-mm-dd)</ion-label>
+                        <ion-input type="text" formControlName="start"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">End (yyyy-mm-dd)</ion-label>
+                        <ion-input type="text" formControlName="end"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Trailer</ion-label>
+                        <ion-input type="text" formControlName="trailer"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Buy</ion-label>
+                        <ion-input type="text" formControlName="buy"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Landscape Photo</ion-label>
+                        <ion-input type="text" formControlName="landscape"></ion-input>
+                        <ion-button color="secondary" (click)="takePicture('landscape')">Upload photo</ion-button>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label position="floating">Poster</ion-label>
+                        <ion-input type="text" formControlName="poster"></ion-input>
+                        <ion-button color="secondary" (click)="takePicture('poster')"> Upload photo</ion-button>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Choose Cinemas</ion-label>
+                        <ion-select multiple="true" type="text" (ionChange)="filterCinema($event)">
+                            <div *ngFor="let cinema of cinemas">
+                                <ion-select-option [value]="cinema?.cinemaID">{{cinema?.name}}</ion-select-option>
+                            </div>
+                        </ion-select>
+                    </ion-item>
+                </form>
+                <ion-button color="primary" shape="block" [disabled]="!movieForm.valid"
+                            (click)="createMovie(cinemaID)">Add new movie
+                </ion-button>
+            </ng-container>
+            <ng-container *ngIf="type === false">
+                <form [formGroup]="cinemaForm">
+                    <ion-item>
+                        <ion-label position="floating">Name</ion-label>
+                        <ion-input type="text" formControlName="name"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Cinema ID</ion-label>
+                        <ion-input type="text" formControlName="cinemaID"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Longitude</ion-label>
+                        <ion-input type="number" formControlName="longitude"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Latitude</ion-label>
+                        <ion-input type="number" formControlName="latitude"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Link</ion-label>
+                        <ion-input type="text" formControlName="link"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Address</ion-label>
+                        <ion-input type="text" formControlName="address"></ion-input>
+                    </ion-item>
+                </form>
+                <ion-button color="primary" shape="block" [disabled]="!cinemaForm.valid"
+                            (click)="createCinema()">Add new cinema
+                </ion-button>
+            </ng-container>
+
+        </ion-card-content>
+    </ion-card>
+</ion-content>

@@ -1,0 +1,17 @@
+<ion-card>
+    <div [routerLink]="navigate">
+        <img [src]="landscape" alt="">
+        <ion-card-header>
+            <ion-card-title>{{title}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            {{description}}
+        </ion-card-content>
+    </div>
+    <ng-container *ngIf="url">
+        <ion-button (click)="goToUrl(url)">Buy Now</ion-button>
+    </ng-container>
+
+
+</ion-card>

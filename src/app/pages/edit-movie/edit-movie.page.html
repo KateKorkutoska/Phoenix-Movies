@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button routerLink="/home">
+                <ion-icon name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        Edit Movie
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-card>
+        <ion-card-content>
+            <form [formGroup]="editForm">
+                <ion-item>
+                    <ion-label position="floating">Title</ion-label>
+                    <ion-input type="text" formControlName="title"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Movie ID</ion-label>
+                    <ion-input type="text" formControlName="movieID"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Director</ion-label>
+                    <ion-input type="text" formControlName="director"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Description</ion-label>
+                    <ion-input type="text" formControlName="description"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Cast</ion-label>
+                    <ion-input type="text" formControlName="cast"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">release date (yyyy-mm-dd)</ion-label>
+                    <ion-input type="text" formControlName="start"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">End (yyyy-mm-dd)</ion-label>
+                    <ion-input type="text" formControlName="end"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Trailer</ion-label>
+                    <ion-input type="text" formControlName="trailer"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Buy</ion-label>
+                    <ion-input type="text" formControlName="buy"></ion-input>
+                </ion-item>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <img [src]="movie?.landscape" alt="">
+                            <ion-button color="secondary" (click)="takePicture('landscape')"> Update Banner</ion-button>
+                        </ion-col>
+                        <ion-col>
+                            <img [src]="movie?.poster" alt="">
+                            <ion-button color="secondary" (click)="takePicture('poster')"> Update Poster</ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </form>
+            <ion-button color="primary" shape="block" [disabled]="!editForm.valid" (click)="update(movie.key,cinemaID)">
+                Update
+            </ion-button>
+
+        </ion-card-content>
+    </ion-card>
+</ion-content>

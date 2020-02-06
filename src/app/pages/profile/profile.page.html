@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>My Profile</ion-title>
+        <ion-buttons slot="end" (click)="presentModal()">
+            <ion-button>Edit
+                <ion-icon name="create"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <div class="card">
+            <div class="header">
+                <ion-avatar style="margin: 0 auto;">
+                    <img [src]="userService.loggedInUser?.img">
+                </ion-avatar>
+            </div>
+            <div class="card-body">
+                <div class="user-meta ion-text-center">
+                    <h3>{{userService.loggedInUser?.name}} {{userService.loggedInUser?.surname}}</h3>
+                    <h5>{{userService.loggedInUser?.email}}</h5>
+                </div>
+            </div>
+        </div>
+    </ion-card>
+    <div style="text-align: center; padding: 5%">
+        <ion-card-title>
+            My Watchlist
+        </ion-card-title>
+    </div>
+
+    <ng-container *ngFor=" let movie of movies; let i =index">
+        <ion-list>
+            <ion-item-sliding>
+                <ion-item [routerLink]="['/home/movie-details', movie.key]">
+                    <img *ngIf="movie?.poster" [src]="movie?.poster" slot="start" height="15%" width="15%">
+                    <ion-label class="ion-text-wrap">
+                        <h2>{{movie?.title}}</h2>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options>
+                    <ion-button color="secondary" (click)="removeMovie(movie.key,i)">Delete</ion-button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+    </ng-container>
+
+</ion-content>
